@@ -1,0 +1,22 @@
+<rss version="2.0">
+<channel>
+<title><?= data.meta['TITLE'] ?></title>
+<link><?= data.meta['SITE_URL'] ?></link>
+<description><?= data.meta['DESCRIPTION'] ?></description>
+<? for (var i=0; i<data.feed.length; i++) { ?>
+<item>
+    <?
+        var description = data.feed[i]['summary_ja'] || data.feed[i]['title_ja'];
+        if (description.length > 140) {
+            description = description.substr(0, 137) + "...";
+        }
+        description = description + " " + data.feed[i]['url'];
+    ?>
+    <title><?= data.feed[i]['title'] ?></title>
+    <link><?= data.feed[i]['url'] ?></link>
+    <pubDate><?= data.feed[i]['published'] ?></pubDate>
+    <description><![CDATA[<?= description ?>]]></description>
+</item>
+<? } ?>
+</channel>
+</rss>
